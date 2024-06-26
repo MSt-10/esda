@@ -1,0 +1,21 @@
+name: Reverse Engineering
+
+on: [push, workflow_dispatch]
+
+jobs:
+  ReverseEngineering:
+    name: Reverse Engineering
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+    - name: Run Rule Engine
+      uses: PalladioSimulator/Palladio-ReverseEngineering-Retriever@main
+      with:
+        source_path: '.'
+        benchmark: 'false'
+        rules: "org.palladiosimulator.retriever.extraction.rules.maven,org.palladiosimulator.retriever.extraction.rules.spring"
